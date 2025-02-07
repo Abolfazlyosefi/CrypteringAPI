@@ -1,9 +1,9 @@
 name: Build and push to AWS
-
+#run
 on:
   push:
     branches:
-      - main #main
+      - main #main trigger
 
 jobs:
   build:
