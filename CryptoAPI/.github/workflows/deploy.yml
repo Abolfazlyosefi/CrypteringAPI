@@ -20,13 +20,13 @@ jobs:
 
       - name: Restore and build project
         run: |
-          cd CrypAPI/CryptoAPI
+          cd CryptoAPI/CryptoAPI # Uppdaterad väg till mappen där csproj-filen finns
           dotnet restore
           dotnet publish -c Release -o ./publish
 
       - name: Create zip package
         run: |
-          cd CrypAPI/CryptoAPI/publish
+          cd CryptoAPI/CryptoAPI/publish # Uppdaterad väg till publish mappen
           zip -r ../../site.zip *
 
       - name: Deploy to AWS EB
