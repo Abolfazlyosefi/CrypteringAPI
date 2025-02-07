@@ -1,4 +1,4 @@
-name: Deploy to AWS Elastic Beanstalk
+name: Build and push to AWS
 
 on:
   push:
@@ -10,30 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore and build project
+        run: |
+          cd CrypAPI/CryptoAPI
+          dotnet restore
+          dotnet publish -c Release -o ./publish
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - name: Create zip package
+        run: |
+          cd CrypAPI/CryptoAPI/publish
+          zip -r ../../site.zip *
 
-      - name: Publish
-        run: dotnet publish -c Release -o ./publish
-
-      - name: Deploy to AWS Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v20
+      - name: Deploy to AWS EB
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: CryptoAPI
           environment_name: CryptoAPI-env
-          version_label: ${{ github.sha }}
-          region: us-east-1
-          deployment_package: ./publish.zip
+          version_label: ${{ github.run_id }}
+          region: eu-north-1
+          deployment_package: site.zip

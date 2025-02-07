@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAPI", "CryptoAPI.csproj", "{2AAE26A0-0ED9-4306-9560-C34396E61ABE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAPI", "CryptoAPI.csproj", "{463BC46F-1740-4475-84C4-D97285123C4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2AAE26A0-0ED9-4306-9560-C34396E61ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AAE26A0-0ED9-4306-9560-C34396E61ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AAE26A0-0ED9-4306-9560-C34396E61ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AAE26A0-0ED9-4306-9560-C34396E61ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463BC46F-1740-4475-84C4-D97285123C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463BC46F-1740-4475-84C4-D97285123C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463BC46F-1740-4475-84C4-D97285123C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463BC46F-1740-4475-84C4-D97285123C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
