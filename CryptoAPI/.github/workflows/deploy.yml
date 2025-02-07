@@ -1,41 +1,18 @@
-name: Build and push to AWS
-#run
+name: Test Workflow
+
 on:
   push:
     branches:
-      - main #main trigger
+      - main  # Trigger on push to main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0'
-
-      - name: Restore and build project
+      - name: Print Hello World
         run: |
-          cd CryptoAPI/CryptoAPI # Uppdaterad väg till mappen där csproj-filen finns
-          dotnet restore
-          dotnet publish -c Release -o ./publish
-
-      - name: Create zip package
-        run: |
-          cd CryptoAPI/CryptoAPI/publish # Uppdaterad väg till publish mappen
-          zip -r ../../site.zip *
-
-      - name: Deploy to AWS EB
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: CryptoAPI
-          environment_name: CryptoAPI-env
-          version_label: ${{ github.run_id }}
-          region: eu-north-1
-          deployment_package: site.zip
+          echo "Hello, World! The action has been triggered successfully!"
