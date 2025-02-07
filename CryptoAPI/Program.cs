@@ -1,41 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// Skapa instans av CipherService
+var cipherService = new CryptoAPI.Services.CipherService();
 
-app.UseHttpsRedirection();
+// Välkomst-API med instruktioner
+app.MapGet("/", () => "Welcome to API for Caesar Cipher!\n\n" +
+    "For encrypting use: /encrypt?input=<text>\n" +
+    "For decrypting use: /decrypt?dinput=<text>");
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+// Endpoint för kryptering
+app.MapGet("/encrypt", (string input) => cipherService.Encrypt(input));
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+// Endpoint för avkryptering
+app.MapGet("/decrypt", (string dinput) => cipherService.Decrypt(dinput));
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
