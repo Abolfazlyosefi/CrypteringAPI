@@ -1,0 +1,9 @@
+# .NET Core & Visual Studio specific files
+.vs/
+.vscode/
+bin/
+obj/
+publish/
+out/
+
+
